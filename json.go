@@ -3,7 +3,6 @@ package martiniHandlers
 import (
 	"encoding/json"
 	"github.com/codegangsta/martini"
-	"log"
 	"net/http"
 	"reflect"
 	"strconv"

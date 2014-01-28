@@ -9,7 +9,7 @@ import (
 	"strconv"
 )
 
-func JsonReturnHandler(logger *log.Logger) martini.ReturnHandler {
+func JsonReturnHandler() martini.ReturnHandler {
 	return func(res http.ResponseWriter, vals []reflect.Value) {
 
 		// Default status code to error to not fool client with unsuccessfull 200 requests
@@ -35,7 +35,6 @@ func JsonReturnHandler(logger *log.Logger) martini.ReturnHandler {
 			if data, err = json.Marshal(responseVal.Interface()); err != nil {
 				data = []byte("INTERNAL ERROR")
 				statusCode = http.StatusInternalServerError
-				logger.Printf("Error marshalling json: %v", err)
 			}
 
 			res.Header().Set("Content-Length", strconv.Itoa(len(data)))

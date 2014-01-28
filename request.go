@@ -1,7 +1,10 @@
 package martiniHandlers
 
 import (
+	"github.com/codegangsta/martini"
 	"github.com/coreos/go-log/log"
+	"net/http"
+	"time"
 )
 
 // RequestLogger returns a middleware handler that logs the request as it goes in and the response as it goes out.

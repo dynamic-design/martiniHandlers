@@ -15,6 +15,6 @@ func RequestLogger() martini.Handler {
 		rw := res.(martini.ResponseWriter)
 		c.Next()
 
-		logger.Infof("[REQ] %v %s %s in %v\n", rw.Status(), req.Method, req.URL.Path, time.Since(start))
+		logger.Infof("[REQ] %v %s %s in %v", rw.Status(), req.Method, req.URL.Path, time.Since(start))
 	}
 }

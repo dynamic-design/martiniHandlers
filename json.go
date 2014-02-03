@@ -2,6 +2,7 @@ package martiniHandlers
 
 import (
 	"encoding/json"
+	"github.com/codegangsta/inject"
 	"github.com/codegangsta/martini"
 	"net/http"
 	"reflect"
@@ -9,7 +10,9 @@ import (
 )
 
 func JsonReturnHandler() martini.ReturnHandler {
-	return func(res http.ResponseWriter, vals []reflect.Value) {
+	return func(ctx martini.Context, vals []reflect.Value) {
+		rv := ctx.Get(inject.InterfaceOf((*http.ResponseWriter)(nil)))
+		res := rv.Interface().(http.ResponseWriter)
 
 		// Default status code to error to not fool client with unsuccessfull 200 requests
 		var statusCode int = http.StatusInternalServerError

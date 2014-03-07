@@ -1,9 +1,11 @@
 package martiniHandlers
 
 import (
-	"encoding/json"
 	"github.com/codegangsta/inject"
 	"github.com/codegangsta/martini"
+
+	"encoding/json"
+	// "fmt"
 	"net/http"
 	"reflect"
 	"strconv"
@@ -34,9 +36,11 @@ func JsonReturnHandler() martini.ReturnHandler {
 			var data []byte
 			var err error
 
-			if data, err = json.Marshal(responseVal.Interface()); err != nil {
-				data = []byte("INTERNAL ERROR")
-				statusCode = http.StatusInternalServerError
+			if !responseVal.IsNil() {
+				if data, err = json.Marshal(responseVal.Interface()); err != nil {
+					data = []byte("INTERNAL ERROR")
+					statusCode = http.StatusInternalServerError
+				}
 			}
 
 			res.Header().Set("Content-Length", strconv.Itoa(len(data)))
